@@ -1,0 +1,50 @@
+name: emmar
+description: "A new Flutter project."
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  get_it: ^7.2.0
+  shared_preferences: ^2.0.15
+  http: ^0.13.4
+  internet_connection_checker: ^1.0.0+1
+  flutter_bloc: ^8.1.1
+  equatable: ^2.0.5
+  dio: ^5.8.0+1
+  intl: ^0.18.1
+  dartz: ^0.10.1
+  cached_network_image: ^3.3.1
+  flutter_svg: ^2.0.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  bloc_test: ^9.1.4
+  mockito: ^5.4.2
+  flutter_lints: ^5.0.0
+
+flutter:
+
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+
+  assets:
+    - assets/images/ 
+  
+  fonts:
+    - family: LamaSans  
+      fonts:
+        - asset: assets/fonts/LamaSans-Regular.otf
+          
