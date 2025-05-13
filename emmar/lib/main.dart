@@ -1,4 +1,5 @@
 import 'package:emmar/features/auth/presentation/pages/first_screen.dart';
+import 'package:emmar/features/auth/presentation/pages/home_page.dart';
 import 'package:emmar/features/auth/presentation/pages/login_page.dart';
 import 'package:emmar/features/auth/presentation/pages/register_page.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/bloc/login/login_bloc.dart';
+import 'features/auth/presentation/pages/forgot_password_page.dart';
 import 'injection_container.dart' as di;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +16,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,8 @@ class MyApp extends StatelessWidget {
           '/': (context) => FirstScreen(),
           '/login': (context) => LoginPage(),
           '/register': (context) => RegisterPage(),
+          '/home': (context) => HomePage(),
+          '/forget_password': (context) => ForgotPasswordPage(),
         },
       ),
     );

@@ -14,7 +14,7 @@ abstract class AuthRemoteDataSource {
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final http.Client client;
-  final String baseUrl = 'http://192.168.101.81';
+  final String baseUrl = 'http://10.0.2.2';
 
   AuthRemoteDataSourceImpl({required this.client});
 
@@ -75,12 +75,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<bool> forgotPassword(String email) async {
+  Future<bool> forgotPassword(String phoneNumber) async {
     final response = await client.post(
       Uri.parse('$baseUrl/forgot-password'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
-        'email': email,
+        'phoneNumber': phoneNumber,
       }),
     );
 

@@ -21,9 +21,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this.forgotPassword,
   }) : super(AuthInitial()) {
     on<LoginEvent>(_onLoginEvent);
-    // on<CreateAccountEvent>(_onCreateAccountEvent);
+    on<CreateAccountEvent>(_onCreateAccountEvent);
     on<VerifyOTPEvent>(_onVerifyOTPEvent);
-    // on<ForgotPasswordEvent>(_onForgotPasswordEvent);
+    on<ForgotPasswordEvent>(_onForgotPasswordEvent);
   }
 
   Future<void> _onLoginEvent(LoginEvent event, Emitter<AuthState> emit) async {
