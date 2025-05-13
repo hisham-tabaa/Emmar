@@ -1,5 +1,5 @@
 import 'package:emmar/core/utils/width-height/length.dart';
-import 'package:emmar/features/auth/presentation/pages/verify_email.dart';
+import 'package:emmar/features/auth/presentation/pages/VerifyAccountPage.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {

@@ -57,46 +57,45 @@ class FirstScreen extends StatelessWidget {
               ),
               
               SizedBox(height: _middleSpacing * getScreenHeightrate(context)),
-              
-          
-              ElevatedButton(
-                onPressed: () => _navigateTo(context, '/login'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFF8F49),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: _buttonHorizontalPadding * getScreenWidthrate(context),
-                    vertical: _buttonVerticalPadding * getScreenHeightrate(context),
+
+
+              SizedBox(width: 327 * getScreenWidthrate(context),height: 48 *getScreenHeightrate(context),
+                child: ElevatedButton(
+                  onPressed: () => _navigateTo(context, '/login'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFFF8F49),
+
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(_buttonRadius),
+                    ),
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(_buttonRadius),
+                  child: Text(
+                    'تسجيل الدخول',
+                    style: _getButtonTextStyle(context),
+
+                    textDirection: TextDirection.rtl,
                   ),
-                ),
-                child: Text(
-                  'تسجيل الدخول',
-                  style: _getButtonTextStyle(context),
-                  textDirection: TextDirection.rtl,
                 ),
               ),
               
               SizedBox(height: _buttonSpacing * getScreenHeightrate(context)),
-              
-             
-              ElevatedButton(
-                onPressed: () => _navigateTo(context, '/register'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(52, 143, 73, 26),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: _buttonHorizontalPadding2 * getScreenWidthrate(context),
-                    vertical: _buttonVerticalPadding * getScreenHeightrate(context),
+
+
+              SizedBox(width: 327 * getScreenWidthrate(context),height: 48 *getScreenHeightrate(context),
+                child: ElevatedButton(
+                  onPressed: () => _navigateTo(context, '/register'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(52, 143, 73, 26),
+
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(_buttonRadius),
+                    ),
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(_buttonRadius),
+                  child: Text(
+                    'انشاء حساب جديد',
+                    style: _getButtonTextStyle(context),
+                    textDirection: TextDirection.rtl,
                   ),
-                ),
-                child: Text(
-                  'انشاء حساب جديد',
-                  style: _getButtonTextStyle(context),
-                  textDirection: TextDirection.rtl,
                 ),
               ),
             ],
