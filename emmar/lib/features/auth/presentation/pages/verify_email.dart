@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 
 class VerifyAccountPage extends StatelessWidget {
-  const VerifyAccountPage({super.key});
+  const VerifyAccountPage({super.key, required String phoneNumber});
 
   @override
   Widget build(BuildContext context) {
