@@ -1,6 +1,5 @@
-import 'package:emmar/features/auth/presentation/bloc/registration_bloc_bloc.dart';
-import 'package:emmar/features/auth/presentation/bloc/registration_bloc_event.dart';
-import 'package:emmar/features/auth/presentation/bloc/registration_bloc_state.dart';
+import 'package:emmar/core/utils/width-height/length.dart';
+import 'package:emmar/features/auth/presentation/pages/VerifyAccountPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:emmar/core/utils/width-height/length.dart';
