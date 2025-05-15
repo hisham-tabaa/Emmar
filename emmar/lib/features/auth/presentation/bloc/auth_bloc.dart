@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
+import '../../../../core/usecases/usecases.dart';
+import '../../domain/usecases/check_auth_status.dart';
 import '../../domain/usecases/create_account.dart';
 import '../../domain/usecases/forgot_password.dart';
 import '../../domain/usecases/login.dart';
@@ -13,17 +14,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final CreateAccount createAccount;
   final VerifyOTP verifyOTP;
   final ForgotPassword forgotPassword;
+  final CheckAuthStatus checkAuthStatus;
 
   AuthBloc({
     required this.login,
     required this.createAccount,
     required this.verifyOTP,
     required this.forgotPassword,
+    required this.checkAuthStatus,
   }) : super(AuthInitial()) {
     on<LoginEvent>(_onLoginEvent);
     on<CreateAccountEvent>(_onCreateAccountEvent);
     on<VerifyOTPEvent>(_onVerifyOTPEvent);
     on<ForgotPasswordEvent>(_onForgotPasswordEvent);
+    on<CheckAuthStatusEvent>(_onCheckAuthStatusEvent);
   }
 
   Future<void> _onLoginEvent(LoginEvent event, Emitter<AuthState> emit) async {
@@ -84,7 +88,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           (failure) => emit(AuthError(message: _mapFailureToMessage(failure))),
           (success) => emit(PasswordResetEmailSent()),
     );
+  }
 
+  Future<void> _onCheckAuthStatusEvent(
+      CheckAuthStatusEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+
+    final result = await checkAuthStatus(NoParams());
+
+    result.fold(
+      (failure) => emit(Unauthenticated()),
+      (user) => emit(Authenticated(user: user)),
+    );
   }
 
   String _mapFailureToMessage(failure) {

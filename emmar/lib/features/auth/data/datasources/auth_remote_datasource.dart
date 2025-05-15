@@ -10,11 +10,12 @@ abstract class AuthRemoteDataSource {
   Future<bool> verifyOTP(String email, String otp);
   Future<bool> createAccount(String name, String email, String phoneNumber, String password);
   Future<bool> forgotPassword(String email);
+  Future<UserModel> validateToken(String token);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final http.Client client;
-  final String baseUrl = 'http://10.0.2.2';
+  final String baseUrl = 'http://192.168.137.1';
 
   AuthRemoteDataSourceImpl({required this.client});
 
@@ -86,6 +87,23 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     if (response.statusCode == 200) {
       return true;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<UserModel> validateToken(String token) async {
+    final response = await client.get(
+      Uri.parse('$baseUrl/api/mobile/auth/validate-token'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return UserModel.fromJson(json.decode(response.body));
     } else {
       throw ServerException();
     }

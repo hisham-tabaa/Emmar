@@ -20,6 +20,7 @@ class UserModel extends User {
          lastName: lastName,
          email: email,
          phone: phone,
+         token: accessToken,
        );
 
   factory UserModel.fromJson(Map<String, dynamic> json) {

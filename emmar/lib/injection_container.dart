@@ -8,6 +8,7 @@ import 'features/auth/data/datasources/auth_local_datasource.dart';
 import 'features/auth/data/datasources/auth_remote_datasource.dart';
 import 'features/auth/data/repositories/auth_repository_impl.dart';
 import 'features/auth/domain/repositories/auth_repository.dart';
+import 'features/auth/domain/usecases/check_auth_status.dart';
 import 'features/auth/domain/usecases/create_account.dart';
 import 'features/auth/domain/usecases/forgot_password.dart';
 import 'features/auth/domain/usecases/login.dart';
@@ -25,6 +26,7 @@ Future<void> init() async {
       createAccount: sl(),
       verifyOTP: sl(),
       forgotPassword: sl(),
+      checkAuthStatus: sl(),
     ),
   );
 
@@ -33,6 +35,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CreateAccount(sl()));
   sl.registerLazySingleton(() => VerifyOTP(sl()));
   sl.registerLazySingleton(() => ForgotPassword(sl()));
+  sl.registerLazySingleton(() => CheckAuthStatus(sl()));
 
   // Repository
   sl.registerLazySingleton<AuthRepository>(

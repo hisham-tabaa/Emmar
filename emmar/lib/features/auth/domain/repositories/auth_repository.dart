@@ -8,4 +8,5 @@ abstract class AuthRepository {
   Future<Either<Failure, bool>> verifyOTP(String email, String otp);
   Future<Either<Failure, bool>> createAccount(String name, String email, String phoneNumber, String password);
   Future<Either<Failure, bool>> forgotPassword(String email);
+  Future<Either<Failure, User>> checkAuthStatus();
 }

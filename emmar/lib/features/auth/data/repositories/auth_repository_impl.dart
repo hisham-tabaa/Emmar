@@ -24,7 +24,11 @@ class AuthRepositoryImpl implements AuthRepository {
     if (await networkInfo.isConnected) {
       try {
         final remoteUser = await remoteDataSource.login(phoneNumber, password);
-        localDataSource.cacheUser(remoteUser);
+        await localDataSource.cacheUser(remoteUser);
+        
+        // Save the token from the user model (accessToken)
+        await localDataSource.saveToken(remoteUser.accessToken);
+        
         return Right(remoteUser);
       } on ServerException {
         return Left(ServerFailure());
@@ -82,6 +86,42 @@ class AuthRepositoryImpl implements AuthRepository {
       }
     } else {
       return Left(NetworkFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> checkAuthStatus() async {
+    try {
+      // Check if token exists
+      final hasToken = await localDataSource.hasToken();
+      if (!hasToken) {
+        return Left(CacheFailure());
+      }
+      
+      // Get cached user
+      try {
+        final user = await localDataSource.getLastUser();
+        
+        // Validate token with server if network is available
+        if (await networkInfo.isConnected) {
+          try {
+            final token = await localDataSource.getToken();
+            final validatedUser = await remoteDataSource.validateToken(token!);
+            await localDataSource.cacheUser(validatedUser);
+            return Right(validatedUser);
+          } on ServerException {
+            // Token invalid on server, but we still have cached user
+            return Right(user);
+          }
+        }
+        
+        // Return cached user if no network
+        return Right(user);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    } catch (e) {
+      return Left(CacheFailure());
     }
   }
 }
